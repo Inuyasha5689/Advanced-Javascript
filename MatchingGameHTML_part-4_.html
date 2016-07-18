@@ -1,0 +1,82 @@
+<!doctype html>
+  <html>
+    <head>
+      <title>My Matching Game</title>
+      <h1>My Matching Game</h1>
+      <meta name="author" content="Drake Scott">
+      <style>
+        img {position: absolute}
+        div {position: absolute; width: 500px; height: 500px}
+        #rightSide { left: 500px; border-left: 1px solid black}
+      </style>
+      <script>
+      window.onload=function(){
+        var numberOfFaces=5;
+        var theLeftSide=document.getElementById('leftSide');
+        var theRightSide=document.getElementById('rightSide');
+        var LeftSideImages=theLeftSide.cloneNode(true);
+        var generateFaces = function(){
+          for(var i=0; i<numberOfFaces; i++){
+            var smile=document.createElement("img");
+            smile.setAttribute('src','smile.png');
+            smile.style.top=Math.floor(Math.random()*400+1)+'px';
+            smile.style.left=Math.floor(Math.random()*400+1)+'px';
+            theLeftSide.appendChild(smile);
+        };
+        var LeftSideImages=theLeftSide.cloneNode(true);
+        LeftSideImages.removeChild(LeftSideImages.lastChild);
+        theRightSide.appendChild(LeftSideImages);
+        theLeftSide.lastChild.onclick=function nextlevel(event){
+          event.stopPropagation();
+          numberOfFaces += 5;
+          while (theLeftSide.firstChild){
+            theLeftSide.removeChild(theLeftSide.firstChild);
+          }
+          while (theRightSide.firstChild){
+            theRightSide.removeChild(theRightSide.firstChild);
+          }
+          generateFaces();
+        };
+      };
+      generateFaces();
+      var theBody=document.getElementsByTagName("body")[0]
+
+      theBody.onclick=function gameOver(){
+        alert("Game Over!");
+        theBody.onclick=null;
+        theLeftSide.lastChild.onclick=null;
+      };
+    };
+      </script>
+    </head>
+    <body id="theBody">
+      <div id="leftSide"></div>
+      <div id="rightSide"></div>
+      <p>Click on the extra smiling face on the left side</p>
+    </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </html>
